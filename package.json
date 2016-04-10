@@ -1,0 +1,22 @@
+{
+  "name": "wifell",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codealchemist/wifell.git"
+  },
+  "author": "Alberto Miranda <b3rt.js@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codealchemist/wifell/issues"
+  },
+  "homepage": "https://github.com/codealchemist/wifell#readme",
+  "dependencies": {
+    "pcap": "^2.0.1"
+  }
+}
