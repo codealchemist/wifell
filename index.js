@@ -22,6 +22,6 @@ io.on('connection', function(socket){
 
 // start web server
 var ip = 'YOUR-LAN-IP-HERE';
-app.listen(3000, ip,function(){
+http.listen(3000, ip,function(){
     console.log('listening on *:3000');
 });
