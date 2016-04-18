@@ -1,30 +1,26 @@
-var pcap = require("pcap"),
-    pcap_session = pcap.createSession("wlan0", ""),
-    addresses = require('./addresses');
+var app = require('express')(),
+    http = require('http').Server(app),
+    io = require('socket.io')(http),
+    capture = require('./services/capture');
 
-console.log("Listening on " + pcap_session.device_name);
+// start capturing packets
+capture.start(io);
 
-pcap_session.on('packet', function (raw_packet) {
-    var packet = pcap.decode.packet(raw_packet),
-        header = packet.pcap_header,
-        senderMacAddress = getSenderMacAddress(packet);
- 
-    //console.log('PACKET:', packet);
-    if (senderMacAddress) {
-        // console.log('FOUND DEVICE MAC ADDRESS:', senderMacAddress);
-
-        if (senderMacAddress in addresses) {
-            var device = addresses[senderMacAddress],
-            date = (new Date()).toLocaleString();
-            console.log(date + ': FOUND KNOWN DEVICE:', device); 
-        }
-    }
+// TODO: move to its own file
+// routes
+app.get('/', function(req, res){
+    res.sendfile('./views/index.html');
 });
 
-function getSenderMacAddress(packet) {
-    if (packet.payload.payload && packet.payload.payload.sender_ha) {
-        return packet.payload.payload.sender_ha.toString().trim();
-    }
+// TODO: move to its own file
+// events
+io.on('connection', function(socket){
+    console.log('a user connected');
 
-    return null;
-}
+    io.emit('hello', {message: 'hello', date: new Date()});
+});
+
+// start web server
+http.listen(3000, function(){
+    console.log('listening on *:3000');
+});

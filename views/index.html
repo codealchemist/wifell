@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<title>wifell</title>
+	</head>
+	<body>
+		<h1>wifell</h1>
+		<h3>test page</h3>
+
+		<div class="event-log"></div>
+
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script>
+		  	var socket = io();
+		  	socket.on('device-appeared', onDeviceAppeared);
+		  	socket.on('hello', onHello);
+
+			/**
+			 * Logs passed arguments to console using a prefix.
+			 *
+			 */
+			function log() {
+				var prefix = '[ WIFELL-CLIENT ]-->',
+				args = [prefix];
+
+				for (var i=0; i<arguments.length; ++i) {
+					args.push(arguments[i]);
+				}
+
+				console.log.apply(console, args);
+			}
+
+		  	function onDeviceAppeared(data) {
+		  		log('onDeviceAppeared:', data);
+		  	}
+
+		  	function onHello(data) {
+		  		log('onHello:', data);
+		  	}
+		</script>
+	</body>
+</html>
