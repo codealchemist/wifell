@@ -1,9 +1,18 @@
-module.exports = captureService;
+var pcap = require("pcap"),
+    pcap_session = pcap.createSession("wlan0", ""),
+    addresses = require('../config/addresses');
+
+
+module.exports = captureService();
 
 function captureService() {
-    var pcap = require("pcap"),
-        pcap_session = pcap.createSession("wlan0", ""),
-        addresses = require('../config/addresses');
+    var service = {
+        start: start
+    };
+
+    return service;
+
+    //----------------------------------------
 
     function start(io) {
         console.log("Listening on " + pcap_session.device_name);
