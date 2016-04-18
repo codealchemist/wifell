@@ -11,7 +11,7 @@ pcap_session.on('packet', function (raw_packet) {
  
     //console.log('PACKET:', packet);
     if (senderMacAddress) {
-        //console.log('FOUND DEVICE MAC ADDRESS:', senderMacAddress);
+        // console.log('FOUND DEVICE MAC ADDRESS:', senderMacAddress);
 
         if (senderMacAddress in addresses) {
             var device = addresses[senderMacAddress],
