@@ -2,7 +2,8 @@
 
 var socket = io(),
 	$foundDevices = $('#found-devices'),
-	$serverConnection = $('#server-connection');
+	$serverConnection = $('#server-connection'),
+	$useVoice = $('#useVoice');
 
 socket.on('device-appeared', onDeviceAppeared);
 socket.on('hello', onHello);
@@ -25,8 +26,12 @@ function log() {
 
 function onDeviceAppeared(data) {
 	log('onDeviceAppeared:', data);
-	var date = (new Date()).toLocaleString();
-	$foundDevices.append('<li>(' + date + ') <b>' + data.device.name + '</b> is nearby!</li>');
+	var date = (new Date()).toLocaleString(),
+		name = data.device.name;
+	$foundDevices.append('<li>(' + date + ') <b>' + name + '</b> is nearby!</li>');
+
+	// speak!
+	if ($useVoice.is(':checked')) speak(name + ' is nearby!');
 }
 
 function onHello(data) {
@@ -36,6 +41,9 @@ function onHello(data) {
 		.html('Connection Established @' + date)
 		.removeClass('text-danger')
 		.addClass('text-success');
+
+	// speak!
+	if ($useVoice.is(':checked')) speak('Yay! Wifell says hello.');
 }
 
 function onServerDisconnected(data) {
@@ -45,5 +53,8 @@ function onServerDisconnected(data) {
 		.html('Connection Lost @' + date)
 		.removeClass('text-success')
 		.addClass('text-danger');
+
+	// speak!
+	if ($useVoice.is(':checked')) speak('Oops... Holy crap! Damn you Internet! Server disconnected.');
 }
 

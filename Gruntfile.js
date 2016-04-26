@@ -49,7 +49,7 @@ module.exports = function(grunt) {
         src: [
           'bower_components/jquery/dist/jquery.min.js',
           'bower_components/bootstrap/dist/js/bootstrap.min.js',
-          'app/js/main.js'
+          'app/js/**/*.js'
         ],
         dest: 'dist/js/<%= pkg.name %>.js'
       },
