@@ -49,7 +49,7 @@ function captureServiceMock() {
         setInterval(emitDeviceAppeared, 3000);
 
         function emitDeviceAppeared() {
-            var device = addresses['0c:77:1a:12:f6:c3'];
+            var device = addresses['MAC-ADDRESS-HERE'];
             date = (new Date()).toLocaleString();
             log(date + ': FOUND KNOWN DEVICE:', device);
 
