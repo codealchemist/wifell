@@ -2,13 +2,16 @@ var express = require('express'),
     app = express(),
     http = require('http').Server(app),
     io = require('socket.io')(http),
-    capture = require('./services/capture');
+    capture = require('./services/capture'),
+    port = 3000;
 
 // start capturing packets
 capture.start(io);
 
 // serve static files
 app.use(express.static('./dist/'));
+
+app.set('port', port);
 
 // TODO: move to its own file
 // routes
@@ -26,6 +29,6 @@ io.on('connection', function(socket){
 
 // start web server
 var ip = 'localhost';
-http.listen(3000, ip,function(){
-    console.log('listening on *:3000');
+http.listen(port, ip, function(){
+    console.log('listening on ' + ip + ':' + port);
 });
