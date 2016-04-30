@@ -2,42 +2,84 @@
 <html>
 	<head>
 		<title>wifell</title>
+		<link rel="stylesheet" type="text/css" href="css/wifell.min.css" />
 	</head>
 	<body>
-		<h1>wifell</h1>
-		<h3>test page</h3>
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">WIFELL</a>
+	        </div>
+	      </div>
+	    </nav>
 
-		<div class="event-log"></div>
+	    <div class="jumbotron">
+	      <div class="container">
+	      	<div class="row">
+	      		<div class="col-md-6">
+			        <h1>WIFELL</h1>
+			        <p>A modern wifi bell for hackers.</p>
+	        	</div>
 
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-		<script>
-		  	var socket = io();
-		  	socket.on('device-appeared', onDeviceAppeared);
-		  	socket.on('hello', onHello);
+	        	<div class="col-md-6">
+	        		<h3>Options:</h3>
+	        		<div class="checkbox">
+					    <label>
+					      <input type="checkbox" id="useVoice"> Use voice
+					    </label>
+					</div>
 
-			/**
-			 * Logs passed arguments to console using a prefix.
-			 *
-			 */
-			function log() {
-				var prefix = '[ WIFELL-CLIENT ]-->',
-				args = [prefix];
+				    <div>
+				      <label for="rate">Rate</label><input type="range" min="0.5" max="2" value="1" step="0.1" id="rate">
+				      <div class="rate-value">1</div>
+				      <div class="clearfix"></div>
+				    </div>
+				    <div>
+				      <label for="pitch">Pitch</label><input type="range" min="0" max="2" value="1" step="0.1" id="pitch">
+				      <div class="pitch-value">1</div>
+				      <div class="clearfix"></div>
+				    </div>
 
-				for (var i=0; i<arguments.length; ++i) {
-					args.push(arguments[i]);
-				}
+				    <select>
+				    </select>
+	        	</div>
+        	</div>
+	      </div>
+	    </div>
 
-				console.log.apply(console, args);
-			}
+	    <div class="container">
+	      <!-- Example row of columns -->
+	      <div class="row">
+	        <div class="col-md-6">
+				<h2>Found Devices</h2>
+				<ul id="found-devices">
+				</ul>
+	        </div>
 
-		  	function onDeviceAppeared(data) {
-		  		log('onDeviceAppeared:', data);
-		  	}
+	        <div class="col-md-6">
+	        	<h2>Server Connection</h2>
+	        	<p id="server-connection" class="text-success"></p>
+	        </div>
+	      </div>
 
-		  	function onHello(data) {
-		  		log('onHello:', data);
-		  	}
-		</script>
+	      <hr>
+
+	      <footer>
+	        <p>
+	        	&copy; 2016 by Alberto Miranda &lt;<a href="mailto:b3rt.js@gmail.com">b3rt.js@gmail.com</a>&gt;
+	        </p>
+	      </footer>
+	    </div> <!-- /container -->
+
+	    <!-- ------------------------------------------------------------------------------- -->
+
+	    <script src="/socket.io/socket.io.js"></script>
+	    <script src="js/wifell.min.js"></script>
 	</body>
 </html>
